@@ -17,6 +17,47 @@
   - `npm run test-calculator`
 */
 
-class Calculator {}
+class Calculator {
+  constructor(initialValue) {
+    this.result = initialValue;
+  }
+  validateNumber(value) {
+    if (typeof value !== "number" || isNaN(value)) {
+      throw new Error("Invalid number");
+    }
+  }
+  add(value) {
+    this.validateNumber(value);
+    this.result += value;
+    return this;
+  }
+  subtract(value) {
+    this.validateNumber(value);
+    this.result -= value;
+    return this;
+  }
+  multiply(value) {
+    this.validateNumber(value);
+    this.result *= value;
+    return this;
+  }
+  divide(value) {
+    this.validateNumber(value);
+    if (value !== 0) {
+      this.result /= value;
+    } else {
+      console.log("division error");
+    }
+    return this;
+  }
+  getResult() {
+    return this.result;
+  }
+}
+
+const calculator = new Calculator(10);
+
+const result = calculator.add(5).subtract(3).multiply(2).divide(4).getResult();
+console.log("result: " + result);
 
 module.exports = Calculator;
